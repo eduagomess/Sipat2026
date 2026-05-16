@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana CIPAT 2025 · Grupo Unità</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --or:#E8620A;
+  --or2:#FF8C38;
+  --or3:#B84D06;
+  --bg:#191919;
+  --bg2:#212121;
+  --bg3:#2A2A2A;
+  --wh:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--wh);overflow-x:hidden;}
+
+/* ══ TRAILER ══ */
+#trailer{
+  position:relative;width:100%;height:100vh;
+  min-height:560px;max-height:900px;
+  overflow:hidden;background:#111;
+}
+#cvs{position:absolute;inset:0;width:100%;height:100%;}
+
+.scene{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  opacity:0;padding:2rem;text-align:center;
+  pointer-events:none;transition:opacity .07s;
+}
+.scene.active{opacity:1;pointer-events:auto;}
+
+/* intro */
+.ci-co{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.78rem;font-weight:700;
+  letter-spacing:7px;text-transform:uppercase;
+  color:rgba(255,255,255,.32);margin-bottom:1.2rem;
+  transform:translateY(24px);opacity:0;
+  transition:all .65s ease;
+}
+.ci-t{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(4.5rem,13vw,9.5rem);
+  font-weight:900;line-height:.82;color:#fff;
+  transform:translateY(34px);opacity:0;
+  transition:all .7s ease .2s;letter-spacing:-4px;
+}
+.ci-t .or{color:var(--or);display:block;}
+.ci-tag{
+  font-size:.8rem;color:rgba(255,255,255,.36);
+  letter-spacing:4px;text-transform:uppercase;
+  margin-top:1.5rem;
+  transform:translateY(20px);opacity:0;
+  transition:all .6s ease .5s;
+}
+.s-intro.active .ci-co,
+.s-intro.active .ci-t,
+.s-intro.active .ci-tag{opacity:1;transform:translateY(0);}
+
+/* day scenes */
+.dnbg{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:min(22rem,44vw);font-weight:900;
+  color:rgba(232,98,10,.045);
+  position:absolute;line-height:1;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;user-select:none;
+  letter-spacing:-10px;
+}
+.dpill{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  background:var(--or);color:#fff;
+  padding:5px 16px;border-radius:2px;
+  margin-bottom:.9rem;
+  transform:translateX(-58px);opacity:0;
+  transition:all .5s ease;
+}
+.ddate{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.95rem;font-weight:600;
+  letter-spacing:3px;color:rgba(255,255,255,.3);
+  margin-bottom:.5rem;
+  transform:translateX(-58px);opacity:0;
+  transition:all .5s ease .1s;
+}
+.dtheme{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+  font-weight:900;color:#fff;
+  line-height:1.02;max-width:760px;
+  transform:translateX(-58px);opacity:0;
+  transition:all .55s ease .18s;
+  letter-spacing:-.5px;
+}
+.dspkr{
+  display:flex;align-items:center;gap:14px;
+  margin-top:1.5rem;
+  transform:translateX(-58px);opacity:0;
+  transition:all .5s ease .3s;
+}
+.dava{
+  width:50px;height:50px;border-radius:50%;
+  background:var(--or3);border:2px solid var(--or);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:1rem;color:#fff;flex-shrink:0;
+}
+.dnm{font-weight:600;font-size:.95rem;color:#fff;text-align:left;}
+.drl{font-size:.74rem;color:rgba(255,255,255,.38);text-align:left;margin-top:2px;}
+.s-day.active .dpill,
+.s-day.active .ddate,
+.s-day.active .dtheme,
+.s-day.active .dspkr{opacity:1;transform:translateX(0);}
+
+/* end scene */
+.et{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:900;color:#fff;
+  line-height:.88;letter-spacing:-1.5px;
+  transform:scale(.78);opacity:0;
+  transition:all .65s cubic-bezier(.34,1.56,.64,1);
+}
+.et .or{color:var(--or);}
+.es{
+  margin-top:1rem;font-size:.76rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,.26);
+  transform:translateY(18px);opacity:0;
+  transition:all .5s ease .3s;
+}
+.ed{
+  margin-top:1.4rem;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:.7rem 1.8rem;
+  background:rgba(232,98,10,.12);
+  border:1px solid rgba(232,98,10,.45);
+  border-radius:100px;
+  font-size:.95rem;color:var(--or2);
+  font-weight:600;letter-spacing:1px;
+  transform:translateY(18px);opacity:0;
+  transition:all .5s ease .52s;
+}
+.s-end.active .et{opacity:1;transform:scale(1);}
+.s-end.active .es,
+.s-end.active .ed{opacity:1;transform:translateY(0);}
+
+/* trailer controls */
+.tpbar{
+  position:absolute;bottom:0;left:0;
+  height:3px;background:var(--or);
+  width:0%;z-index:10;
+}
+.tctrls{
+  position:absolute;bottom:18px;right:18px;
+  display:flex;gap:8px;z-index:20;
+}
+.cbtn{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  color:rgba(255,255,255,.6);
+  border-radius:5px;width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;
+  transition:all .2s;
+}
+.cbtn:hover{background:rgba(232,98,10,.3);border-color:var(--or);color:#fff;}
+.sdots{
+  position:absolute;bottom:22px;left:50%;
+  transform:translateX(-50%);
+  display:flex;gap:6px;z-index:20;
+}
+.sdot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  cursor:pointer;transition:all .3s;
+}
+.sdot.on{background:var(--or);width:20px;border-radius:3px;}
+.corner{position:absolute;width:24px;height:24px;border-color:var(--or);border-style:solid;opacity:.28;}
+.ctl{top:14px;left:14px;border-width:2px 0 0 2px;}
+.ctr{top:14px;right:14px;border-width:2px 2px 0 0;}
+.cbl{bottom:14px;left:14px;border-width:0 0 2px 2px;}
+.cbr{bottom:14px;right:14px;border-width:0 2px 2px 0;}
+.shint{
+  position:absolute;bottom:22px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;
+  align-items:center;gap:7px;
+  opacity:0;transition:opacity .5s ease 1s;
+  z-index:20;
+}
+.shint.show{opacity:1;}
+.shint span{
+  font-size:.6rem;letter-spacing:3.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.26);
+}
+.sarr{
+  width:1px;height:30px;
+  background:rgba(232,98,10,.35);
+  position:relative;overflow:hidden;
+}
+.sarr::after{
+  content:'';position:absolute;
+  top:-100%;left:0;
+  width:100%;height:100%;
+  background:var(--or);
+  animation:sd 1.6s ease-in-out infinite;
+}
+@keyframes sd{0%{top:-100%}100%{top:100%}}
+
+/* ══ HERO ══ */
+.hero{
+  position:relative;
+  background:var(--bg);
+  padding:5rem 2rem 3.5rem;
+  text-align:center;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,transparent,transparent 20px,
+    rgba(232,98,10,.035) 20px,rgba(232,98,10,.035) 22px
+  );
+  pointer-events:none;
+}
+.h-co{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:.9rem;
+}
+.h-co span{color:var(--or);}
+.h-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--or);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  padding:6px 18px;border-radius:2px;
+  margin-bottom:1.5rem;
+}
+.pdot{
+  display:inline-block;width:7px;height:7px;
+  background:#fff;border-radius:50%;
+  animation:pp 2s infinite;
+}
+@keyframes pp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
+.h-t{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(3.5rem,12vw,8.5rem);
+  font-weight:900;line-height:.82;
+  letter-spacing:-3px;color:#fff;
+}
+.h-t span{color:var(--or);display:block;}
+.h-sub{
+  font-size:.78rem;color:rgba(255,255,255,.36);
+  margin-top:1.2rem;letter-spacing:3px;
+  text-transform:uppercase;
+}
+.h-dates{
+  margin-top:1.8rem;
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+  padding:.75rem 1.8rem;border-radius:100px;
+  font-size:.9rem;color:rgba(255,255,255,.58);
+  letter-spacing:1px;
+}
+.cal-icon{
+  width:20px;height:20px;
+  background:var(--or);border-radius:3px;
+  display:inline-flex;align-items:center;
+  justify-content:center;font-size:.7rem;
+  font-weight:900;color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  flex-shrink:0;
+}
+
+/* divider */
+.dstripe{display:flex;height:5px;width:100%;}
+.dstripe s{flex:1;height:100%;text-decoration:none;}
+
+/* info bar */
+.ibar{
+  background:linear-gradient(135deg,#1a1a1a 0%,#222 50%,#1a1a1a 100%);
+  padding:0;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  position:relative;
+  overflow:hidden;
+}
+.ibar::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent,transparent 120px,rgba(232,98,10,.025) 120px,rgba(232,98,10,.025) 121px);
+  pointer-events:none;
+}
+.ibar-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  position:relative;
+}
+@media(max-width:640px){.ibar-inner{grid-template-columns:1fr;}}
+.iitem{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:8px;
+  padding:2.4rem 1.5rem;
+  border-right:1px solid rgba(255,255,255,.06);
+  position:relative;
+  transition:background .3s;
+}
+.iitem:last-child{border-right:none;}
+.iitem::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:50%;
+  transform:translateX(-50%) scaleX(0);
+  width:60%;height:2px;
+  background:var(--or);
+  transition:transform .35s ease;
+  border-radius:2px;
+}
+.iitem:hover{background:rgba(232,98,10,.05);}
+.iitem:hover::after{transform:translateX(-50%) scaleX(1);}
+.iicon{
+  font-size:2rem;line-height:1;
+  margin-bottom:2px;
+}
+.iitem-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.6rem;font-weight:700;
+  letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--or);opacity:.9;
+}
+.iitem-val{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.25rem;font-weight:900;
+  color:#fff;letter-spacing:.2px;
+  text-align:center;line-height:1.2;
+}
+
+/* ══ PROGRAMAÇÃO ══ */
+.sched{max-width:860px;margin:0 auto;padding:4.5rem 1.5rem;}
+.sec-hd{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--or);margin-bottom:2.2rem;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-hd::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07);}
+
+.dc{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;margin-bottom:1rem;
+  overflow:hidden;cursor:pointer;
+  transition:border-color .25s,background .25s;
+}
+.dc:hover{border-color:rgba(232,98,10,.42);background:rgba(232,98,10,.04);}
+.dc.open{border-color:var(--or2);background:rgba(232,98,10,.055);}
+
+.dc-hd{
+  display:grid;
+  grid-template-columns:78px 1fr auto;
+  align-items:center;gap:1rem;
+  padding:1.3rem 1.6rem;
+}
+.dc-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:3rem;font-weight:900;
+  color:var(--or);line-height:1;
+}
+.dc-nsl{
+  font-size:.6rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.22);
+  display:block;margin-top:2px;
+}
+.dc-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.4rem;font-weight:800;color:#fff;
+}
+.dc-wk{
+  font-size:.78rem;color:rgba(255,255,255,.34);
+  margin-top:5px;display:flex;
+  align-items:center;gap:6px;
+}
+.dot-or{
+  width:6px;height:6px;background:var(--or);
+  border-radius:50%;flex-shrink:0;opacity:.8;
+}
+.chev{
+  font-size:1.2rem;
+  color:rgba(255,255,255,.2);
+  transition:transform .3s,color .2s;
+  font-style:normal;display:block;
+  width:24px;text-align:center;
+  line-height:1;
+}
+.dc.open .chev{transform:rotate(180deg);color:var(--or);}
+
+.dc-body{max-height:0;overflow:hidden;transition:max-height .42s ease;}
+.dc.open .dc-body{max-height:520px;}
+.dc-in{padding:0 1.6rem 1.6rem;border-top:1px solid rgba(255,255,255,.05);}
+
+.dc-desc{
+  font-size:.87rem;color:rgba(255,255,255,.42);
+  line-height:1.8;margin:1rem 0 1.1rem;
+}
+.turmas{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;margin-bottom:1rem;
+}
+.turma{
+  background:rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;padding:.9rem 1rem;
+}
+.t-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.6rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--or);margin-bottom:5px;
+  display:flex;align-items:center;gap:5px;
+}
+.t-icon{
+  width:14px;height:14px;
+  background:var(--or);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.55rem;color:#fff;font-weight:900;
+  font-family:'Barlow Condensed',sans-serif;
+}
+.t-time{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.8rem;font-weight:900;
+  color:#fff;line-height:1;
+}
+.t-dur{font-size:.72rem;color:rgba(255,255,255,.27);margin-top:4px;}
+
+.spkbox{
+  display:flex;align-items:center;gap:13px;
+  padding:.9rem 1rem;
+  background:rgba(232,98,10,.07);
+  border:1px solid rgba(232,98,10,.17);
+  border-radius:8px;
+}
+.spk-av{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--or3);
+  border:2px solid rgba(232,98,10,.45);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:.95rem;
+  color:#fff;flex-shrink:0;
+}
+.spk-n{font-weight:600;font-size:.9rem;color:#fff;}
+.spk-r{font-size:.73rem;color:rgba(255,255,255,.35);margin-top:2px;}
+
+/* ══ PARTICIPAÇÃO ══ */
+.part{
+  position:relative;
+  background:var(--bg2);
+  padding:6rem 1.5rem;
+  overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.04);
+}
+.part::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    135deg,transparent,transparent 22px,
+    rgba(232,98,10,.028) 22px,rgba(232,98,10,.028) 24px
+  );
+  pointer-events:none;
+}
+.part-inner{
+  max-width:860px;margin:0 auto;
+  text-align:center;position:relative;
+}
+.part-bigicon{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(232,98,10,.1);
+  border:2px solid rgba(232,98,10,.3);
+  display:flex;align-items:center;
+  justify-content:center;
+  margin:0 auto 1.8rem;
+  font-size:2.5rem;
+}
+.part-t{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(2.6rem,6vw,4.5rem);
+  font-weight:900;color:#fff;
+  line-height:.9;letter-spacing:-1px;
+  margin-bottom:1.6rem;
+}
+.part-t span{color:var(--or);display:block;}
+.part-txt{
+  font-size:1rem;color:rgba(255,255,255,.46);
+  line-height:1.9;margin-bottom:3.5rem;
+  max-width:700px;margin-left:auto;margin-right:auto;
+}
+.part-txt strong{color:rgba(255,255,255,.8);}
+
+.part-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:1rem;margin-bottom:3.5rem;
+}
+.pc{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:1.7rem 1.2rem;
+  display:flex;flex-direction:column;
+  align-items:center;gap:13px;
+  transition:border-color .25s,background .25s,transform .25s;
+}
+.pc:hover{
+  border-color:rgba(232,98,10,.45);
+  background:rgba(232,98,10,.05);
+  transform:translateY(-5px);
+}
+.pc-emoji{font-size:2rem;line-height:1;}
+.pc-t{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.05rem;font-weight:700;color:#fff;
+  text-align:center;
+}
+.pc-s{
+  font-size:.8rem;color:rgba(255,255,255,.38);
+  line-height:1.55;text-align:center;
+}
+
+.part-cta{
+  background:rgba(232,98,10,.09);
+  border:1px solid rgba(232,98,10,.25);
+  border-radius:16px;padding:2.4rem 2.5rem;
+  margin-bottom:2rem;
+}
+.part-cta-t{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.7rem;font-weight:900;
+  color:#fff;margin-bottom:.7rem;
+}
+.part-cta-s{
+  font-size:.92rem;color:rgba(255,255,255,.46);
+  margin-bottom:1.6rem;line-height:1.7;
+}
+.part-cta-s strong{color:rgba(255,255,255,.75);}
+
+/* ══ MODAL INSCRIÇÃO ══ */
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--or);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.2rem;font-weight:700;
+  letter-spacing:1px;padding:1rem 2.4rem;
+  border-radius:7px;cursor:pointer;border:none;
+  transition:background .2s,transform .2s;
+  text-decoration:none;
+}
+.cta-btn:hover{background:var(--or2);transform:scale(1.04);}
+
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.overlay.show{opacity:1;pointer-events:auto;}
+.modal{
+  background:var(--bg3);
+  border:1px solid rgba(232,98,10,.3);
+  border-radius:16px;
+  padding:2.5rem;
+  width:100%;max-width:500px;
+  position:relative;
+  transform:scale(.9);
+  transition:transform .3s;
+}
+.overlay.show .modal{transform:scale(1);}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.6);
+  width:32px;height:32px;border-radius:50%;
+  font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.modal-close:hover{background:rgba(232,98,10,.3);color:#fff;}
+.modal h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.8rem;font-weight:900;color:#fff;
+  margin-bottom:.4rem;
+}
+.modal h3 span{color:var(--or);}
+.modal-sub{font-size:.82rem;color:rgba(255,255,255,.38);margin-bottom:1.8rem;letter-spacing:.5px;}
+.field{margin-bottom:1.1rem;}
+.field label{
+  display:block;font-size:.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:6px;
+  font-family:'Barlow Condensed',sans-serif;
+}
+.field input,
+.field select{
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:7px;padding:.8rem 1rem;
+  color:#fff;font-family:'Barlow',sans-serif;
+  font-size:.9rem;outline:none;
+  transition:border-color .2s;
+}
+.field input:focus,
+.field select:focus{border-color:var(--or);}
+.field select option{background:var(--bg3);color:#fff;}
+.field input::placeholder{color:rgba(255,255,255,.25);}
+.modal-btn{
+  width:100%;background:var(--or);
+  border:none;border-radius:7px;
+  padding:1rem;color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.1rem;font-weight:700;
+  letter-spacing:1px;cursor:pointer;
+  transition:background .2s,transform .2s;
+  margin-top:.5rem;
+}
+.modal-btn:hover{background:var(--or2);transform:scale(1.02);}
+.success-msg{
+  display:none;
+  text-align:center;padding:1rem 0;
+}
+.success-msg .check{
+  font-size:3rem;margin-bottom:1rem;
+  display:block;
+}
+.success-msg h4{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.6rem;font-weight:900;color:#fff;
+  margin-bottom:.5rem;
+}
+.success-msg h4 span{color:var(--or);}
+.success-msg p{font-size:.87rem;color:rgba(255,255,255,.4);line-height:1.6;}
+
+.part-fine{
+  font-size:.8rem;color:rgba(255,255,255,.2);
+  letter-spacing:.5px;font-style:italic;
+}
+
+/* ══ FOOTER ══ */
+footer{
+  background:#0e0e0e;
+  border-top:3px solid var(--or);
+  padding:3rem 2rem;text-align:center;
+}
+.ft-top{
+  display:flex;justify-content:center;
+  align-items:center;gap:2.5rem;flex-wrap:wrap;
+  margin-bottom:2rem;padding-bottom:2rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.ft-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:.78rem;color:rgba(255,255,255,.3);
+  letter-spacing:.5px;
+}
+.ft-dot{
+  width:8px;height:8px;background:var(--or);
+  border-radius:50%;flex-shrink:0;
+}
+.ft-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.7rem;font-weight:900;
+  color:#fff;letter-spacing:1px;margin-bottom:.3rem;
+}
+.ft-logo span{color:var(--or);}
+.ft-co{font-size:.75rem;color:rgba(255,255,255,.2);letter-spacing:1px;margin-bottom:1rem;}
+.ft-copy{font-size:.68rem;color:rgba(255,255,255,.12);}
+</style>
+</head>
+<body>
+
+<!-- ══════════ TRAILER ANIMADO ══════════ -->
+<section id="trailer" aria-label="Trailer da Semana CIPAT 2025">
+  <canvas id="cvs"></canvas>
+  <div class="corner ctl"></div>
+  <div class="corner ctr"></div>
+  <div class="corner cbl"></div>
+  <div class="corner cbr"></div>
+
+  <div class="scene s-intro" id="sc0">
+    <div class="ci-co">Grupo Unità · apresenta</div>
+    <div class="ci-t">SEMANA<span class="or">CIPAT</span>2025</div>
+    <div class="ci-tag">Segurança é responsabilidade de todos</div>
+  </div>
+
+  <div class="scene s-day" id="sc1">
+    <div class="dnbg">01</div>
+    <div class="dpill">Dia 1 &middot; Segunda-feira</div>
+    <div class="ddate">06 de Julho de 2025</div>
+    <div class="dtheme">Cultura de Segurança no Trabalho</div>
+    <div class="dspkr">
+      <div class="dava">CM</div>
+      <div><div class="dnm">Dr. Carlos Mendes</div><div class="drl">Médico do Trabalho</div></div>
+    </div>
+  </div>
+
+  <div class="scene s-day" id="sc2">
+    <div class="dnbg">02</div>
+    <div class="dpill">Dia 2 &middot; Terça-feira</div>
+    <div class="ddate">07 de Julho de 2025</div>
+    <div class="dtheme">Ergonomia e Saúde Postural</div>
+    <div class="dspkr">
+      <div class="dava">AS</div>
+      <div><div class="dnm">Dra. Ana Paula Souza</div><div class="drl">Fisioterapeuta Ocupacional</div></div>
+    </div>
+  </div>
+
+  <div class="scene s-day" id="sc3">
+    <div class="dnbg">03</div>
+    <div class="dpill">Dia 3 &middot; Quarta-feira</div>
+    <div class="ddate">08 de Julho de 2025</div>
+    <div class="dtheme">Saúde Mental e Bem-estar</div>
+    <div class="dspkr">
+      <div class="dava">FL</div>
+      <div><div class="dnm">Psic. Fernanda Lima</div><div class="drl">Psicóloga Organizacional</div></div>
+    </div>
+  </div>
+
+  <div class="scene s-day" id="sc4">
+    <div class="dnbg">04</div>
+    <div class="dpill">Dia 4 &middot; Quinta-feira</div>
+    <div class="ddate">09 de Julho de 2025</div>
+    <div class="dtheme">Primeiros Socorros e Emergências</div>
+    <div class="dspkr">
+      <div class="dava">RA</div>
+      <div><div class="dnm">Enf. Roberto Alves</div><div class="drl">Enfermeiro e Socorrista</div></div>
+    </div>
+  </div>
+
+  <div class="scene s-day" id="sc5">
+    <div class="dnbg">05</div>
+    <div class="dpill">Dia 5 &middot; Sexta-feira</div>
+    <div class="ddate">10 de Julho de 2025</div>
+    <div class="dtheme">Riscos Químicos e Uso de EPI</div>
+    <div class="dspkr">
+      <div class="dava">MO</div>
+      <div><div class="dnm">Eng. Marcos Oliveira</div><div class="drl">Engenheiro de Segurança</div></div>
+    </div>
+  </div>
+
+  <div class="scene s-end" id="sc6">
+    <div class="et">NÃO PERCA!<br><span class="or">CIPAT 2025</span></div>
+    <div class="es">Grupo Unità &middot; Comissão Interna de Prevenção de Acidentes</div>
+    <div class="ed">&#128197; 06 a 10 de Julho &middot; 2 turmas por dia &middot; 11h e 13h</div>
+  </div>
+
+  <div class="tpbar" id="tpbar"></div>
+  <div class="sdots" id="sdots"></div>
+  <div class="tctrls">
+    <button class="cbtn" id="bprev" title="Anterior">&#8592;</button>
+    <button class="cbtn" id="bpp" title="Pausar">&#9646;&#9646;</button>
+    <button class="cbtn" id="bnext" title="Próximo">&#8594;</button>
+  </div>
+  <div class="shint" id="shint">
+    <span>Ver programação</span>
+    <div class="sarr"></div>
+  </div>
+</section>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="h-co"><span>Grupo Unità</span> &middot; apresenta</div>
+  <div class="h-badge"><span class="pdot"></span> Comissão Interna de Prevenção de Acidentes e Trabalho</div>
+  <h1 class="h-t">SEMANA<span>CIPAT</span>2025</h1>
+  <p class="h-sub">Segurança é responsabilidade de todos</p>
+  <div class="h-dates">
+    <span class="cal-icon">07</span>
+    06 a 10 de Julho &nbsp;&middot;&nbsp; 5 dias &nbsp;&middot;&nbsp; 10 turmas
+  </div>
+</section>
+
+<div class="dstripe">
+  <s style="background:#E8620A"></s>
+  <s style="background:#CB5508"></s>
+  <s style="background:#A84205"></s>
+  <s style="background:#191919"></s>
+</div>
+
+<div class="ibar">
+  <div class="ibar-inner">
+    <div class="iitem">
+      <div class="iicon">&#128101;</div>
+      <div class="iitem-label">Turmas diárias</div>
+      <div class="iitem-val">2 turmas por dia</div>
+    </div>
+    <div class="iitem">
+      <div class="iicon">&#9201;</div>
+      <div class="iitem-label">Horários</div>
+      <div class="iitem-val">11h00 &nbsp;|&nbsp; 13h00</div>
+    </div>
+    <div class="iitem">
+      <div class="iicon">&#127970;</div>
+      <div class="iitem-label">Realização</div>
+      <div class="iitem-val">Grupo Unità</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PROGRAMAÇÃO ══════════ -->
+<div class="sched" id="programacao">
+  <p class="sec-hd">Programação completa &mdash; clique para expandir</p>
+  <div id="accordion"></div>
+</div>
+
+<!-- ══════════ PARTICIPAÇÃO ══════════ -->
+<section class="part">
+  <div class="part-inner">
+
+    <div class="part-bigicon">&#128737;</div>
+    <h2 class="part-t">Sua presença<span>faz toda a diferença!</span></h2>
+    <p class="part-txt">
+      A Semana CIPAT não é apenas um evento &mdash; é um compromisso coletivo com a segurança, a saúde e o bem-estar de todos no Grupo Unità. Cada palestra foi planejada para trazer conhecimento prático e aplicável. <strong>A sua participação é fundamental e muito importante!</strong> Não perca essa oportunidade de crescer junto com sua equipe.
+    </p>
+
+    <div class="part-cards">
+      <div class="pc">
+        <div class="pc-emoji">&#10084;&#65039;</div>
+        <div class="pc-t">Conhecimento que salva vidas</div>
+        <div class="pc-s">Técnicas práticas que fazem diferença em situações críticas no trabalho e fora dele</div>
+      </div>
+      <div class="pc">
+        <div class="pc-emoji">&#129309;</div>
+        <div class="pc-t">Fortalece a equipe</div>
+        <div class="pc-s">Times bem informados criam ambientes mais seguros, saudáveis e produtivos</div>
+      </div>
+      <div class="pc">
+        <div class="pc-emoji">&#129504;</div>
+        <div class="pc-t">Cuide da sua saúde</div>
+        <div class="pc-s">Saúde mental, ergonomia e bem-estar no ambiente de trabalho &mdash; assuntos que te afetam</div>
+      </div>
+      <div class="pc">
+        <div class="pc-emoji">&#127775;</div>
+        <div class="pc-t">Seja um exemplo</div>
+        <div class="pc-s">Colaboradores engajados inspiram colegas e constroem uma cultura de segurança duradoura</div>
+      </div>
+    </div>
+
+    <div class="part-cta">
+      <div class="part-cta-t">&#128072; Reserve o seu lugar &mdash; sua presença é essencial!</div>
+      <div class="part-cta-s">
+        Temos 2 turmas por dia para que <strong>ninguém fique de fora</strong>.<br>
+        Escolha o melhor horário e confirme sua inscrição. Cada colaborador conta!
+      </div>
+      <button class="cta-btn" onclick="document.getElementById('overlay').classList.add('show')">
+        &#128197; Quero me inscrever agora
+      </button>
+    </div>
+
+    <p class="part-fine">&ldquo;A segurança não é uma opção &mdash; é um direito e um dever de todos nós.&rdquo;</p>
+  </div>
+</section>
+
+<!-- ══════════ MODAL INSCRIÇÃO ══════════ -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('overlay').classList.remove('show')">&#10005;</button>
+
+    <div id="form-wrap">
+      <h3>Inscrição <span>CIPAT 2025</span></h3>
+      <p class="modal-sub">Grupo Unità &middot; Preencha os dados abaixo</p>
+
+      <div class="field">
+        <label>Seu nome completo</label>
+        <input type="text" id="f-nome" placeholder="Ex: João da Silva">
+      </div>
+      <div class="field">
+        <label>Setor / Departamento</label>
+        <input type="text" id="f-setor" placeholder="Ex: Recursos Humanos">
+      </div>
+      <div class="field">
+        <label>Escolha o dia</label>
+        <select id="f-dia">
+          <option value="">Selecione um dia...</option>
+          <option>Dia 1 &mdash; 06/07 &middot; Cultura de Segurança no Trabalho</option>
+          <option>Dia 2 &mdash; 07/07 &middot; Ergonomia e Saúde Postural</option>
+          <option>Dia 3 &mdash; 08/07 &middot; Saúde Mental e Bem-estar</option>
+          <option>Dia 4 &mdash; 09/07 &middot; Primeiros Socorros e Emergências</option>
+          <option>Dia 5 &mdash; 10/07 &middot; Riscos Químicos e Uso de EPI</option>
+          <option>Todos os dias</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Escolha o horário</label>
+        <select id="f-turma">
+          <option value="">Selecione o horário...</option>
+          <option>Turma 1 &mdash; Manhã (11h às 12h)</option>
+          <option>Turma 2 &mdash; Tarde (13h às 14h)</option>
+        </select>
+      </div>
+
+      <button class="modal-btn" onclick="submitForm()">Confirmar minha inscrição &#10003;</button>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      <span class="check">&#9989;</span>
+      <h4>Inscrição <span>confirmada!</span></h4>
+      <p>Obrigado por se inscrever na Semana CIPAT 2025 do Grupo Unità. Nos vemos em julho!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-item"><div class="ft-dot"></div> CIPA &mdash; Comissão Interna de Prevenção de Acidentes</div>
+    <div class="ft-item"><div class="ft-dot"></div> 06 a 10 de Julho de 2025</div>
+    <div class="ft-item"><div class="ft-dot"></div> Turmas: 11h&ndash;12h e 13h&ndash;14h</div>
+    <div class="ft-item"><div class="ft-dot"></div> Realização: CIPA &mdash; Grupo Unità</div>
+  </div>
+  <div class="ft-logo">SEMANA <span>CIPAT</span> 2025</div>
+  <div class="ft-co">Grupo Unità</div>
+  <div class="ft-copy">Trabalhando juntos por um ambiente mais seguro e saudável para todos</div>
+</footer>
+
+<script>
+/* ─── DADOS ─── */
+const DAYS = [
+  {
+    num:'06', wk:'Segunda-feira',
+    theme:'Cultura de Segurança no Trabalho',
+    desc:'Entenda como construir e fortalecer uma cultura genuína de prevenção dentro da organização. Veremos como comportamentos individuais e coletivos impactam os índices de segurança e como cada colaborador é peça-chave nesse processo.',
+    spk:'Dr. Carlos Mendes', role:'Médico do Trabalho', ini:'CM'
+  },
+  {
+    num:'07', wk:'Terça-feira',
+    theme:'Ergonomia e Saúde Postural',
+    desc:'Aprenda sobre a prevenção de doenças osteomusculares relacionadas ao trabalho, boas práticas posturais para diferentes funções e como adaptar seu posto de trabalho para garantir conforto, eficiência e saúde no longo prazo.',
+    spk:'Dra. Ana Paula Souza', role:'Fisioterapeuta Ocupacional', ini:'AS'
+  },
+  {
+    num:'08', wk:'Quarta-feira',
+    theme:'Saúde Mental e Bem-estar',
+    desc:'Burnout, estresse ocupacional e ansiedade são realidades cada vez mais presentes. Discutiremos estratégias práticas para o equilíbrio emocional, a importância do suporte entre colegas e como criar um espaço de cuidado mútuo.',
+    spk:'Psic. Fernanda Lima', role:'Psicóloga Organizacional', ini:'FL'
+  },
+  {
+    num:'09', wk:'Quinta-feira',
+    theme:'Primeiros Socorros e Emergências',
+    desc:'Saiba como agir nos primeiros momentos de uma emergência no trabalho: RCP, controle de hemorragias, engasgamentos e queimaduras. Conhecimento prático que pode fazer a diferença entre a vida e a morte.',
+    spk:'Enf. Roberto Alves', role:'Enfermeiro e Socorrista', ini:'RA'
+  },
+  {
+    num:'10', wk:'Sexta-feira',
+    theme:'Riscos Químicos e Uso de EPI',
+    desc:'Identifique agentes químicos nocivos no ambiente de trabalho, aprenda o uso correto dos Equipamentos de Proteção Individual e conheça as responsabilidades legais de empregadores e trabalhadores segundo as NRs vigentes.',
+    spk:'Eng. Marcos Oliveira', role:'Engenheiro de Segurança do Trabalho', ini:'MO'
+  }
+];
+
+/* ─── TRAILER ─── */
+const TOTAL = 7;
+const DURS  = [3400, 3800, 3800, 3800, 3800, 3800, 4800];
+let cur=0, paused=false, elapsed=0, rafSt=null, raf=null;
+
+const scenes  = Array.from({length:TOTAL}, (_,i) => document.getElementById('sc'+i));
+const tpbar   = document.getElementById('tpbar');
+const dotsEl  = document.getElementById('sdots');
+const bpp     = document.getElementById('bpp');
+const shint   = document.getElementById('shint');
+
+const dots = Array.from({length:TOTAL}, (_,i) => {
+  const d = document.createElement('div');
+  d.className = 'sdot';
+  d.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(d);
+  return d;
+});
+
+function showSc(idx) {
+  scenes.forEach((s,i) => s.classList.toggle('active', i===idx));
+  dots.forEach((d,i)   => d.classList.toggle('on',     i===idx));
+  shint.classList.toggle('show', idx === TOTAL-1);
+}
+
+function startP() {
+  if (raf) cancelAnimationFrame(raf);
+  rafSt = performance.now() - elapsed;
+  function tick(now) {
+    if (paused) return;
+    elapsed = now - rafSt;
+    const dur = DURS[cur];
+    tpbar.style.width = Math.min(elapsed/dur*100, 100) + '%';
+    if (elapsed >= dur) {
+      elapsed = 0;
+      cur = (cur+1) % TOTAL;
+      showSc(cur);
+      startP();
+      return;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  raf = requestAnimationFrame(tick);
+}
+
+function goTo(idx) {
+  if (raf) cancelAnimationFrame(raf);
+  elapsed = 0;
+  cur = idx;
+  showSc(cur);
+  if (!paused) startP();
+  else tpbar.style.width = '0%';
+}
+
+document.getElementById('bprev').addEventListener('click', () => goTo((cur-1+TOTAL)%TOTAL));
+document.getElementById('bnext').addEventListener('click', () => goTo((cur+1)%TOTAL));
+bpp.addEventListener('click', () => {
+  paused = !paused;
+  bpp.innerHTML = paused ? '&#9654;' : '&#9646;&#9646;';
+  if (!paused) startP();
+  else if (raf) cancelAnimationFrame(raf);
+});
+
+/* ─── CANVAS ─── */
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+function rsz() { cvs.width = cvs.offsetWidth; cvs.height = cvs.offsetHeight; }
+rsz(); window.addEventListener('resize', rsz);
+
+const pts = Array.from({length:70}, () => ({
+  x: Math.random() * cvs.width,
+  y: Math.random() * cvs.height,
+  r: Math.random()*1.6+.3,
+  vx: (Math.random()-.5)*.28,
+  vy: (Math.random()-.5)*.28,
+  a: Math.random()*.32+.06
+}));
+
+function drawBg() {
+  const W=cvs.width, H=cvs.height;
+  ctx.fillStyle='#111'; ctx.fillRect(0,0,W,H);
+  pts.forEach(p => {
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(232,98,10,${p.a})`; ctx.fill();
+  });
+  for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
+    const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<105){
+      ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y);
+      ctx.strokeStyle=`rgba(232,98,10,${.07*(1-dist/105)})`; ctx.lineWidth=.5; ctx.stroke();
+    }
+  }
+  requestAnimationFrame(drawBg);
+}
+drawBg(); showSc(0); startP();
+
+/* ─── ACORDEÃO ─── */
+const acc = document.getElementById('accordion');
+DAYS.forEach((d,i) => {
+  const c = document.createElement('div');
+  c.className = 'dc';
+  c.innerHTML = `
+    <div class="dc-hd">
+      <div>
+        <div class="dc-num">${d.num}</div>
+        <span class="dc-nsl">jul</span>
+      </div>
+      <div>
+        <div class="dc-title">${d.theme}</div>
+        <div class="dc-wk">
+          <span class="dot-or"></span>
+          ${d.wk}
+        </div>
+      </div>
+      <span class="chev">&#9660;</span>
+    </div>
+    <div class="dc-body">
+      <div class="dc-in">
+        <p class="dc-desc">${d.desc}</p>
+        <div class="turmas">
+          <div class="turma">
+            <div class="t-lbl">
+              <div class="t-icon">1</div>
+              Turma 1 &middot; Manh&atilde;
+            </div>
+            <div class="t-time">11h00</div>
+            <div class="t-dur">encerra &agrave;s 12h00</div>
+          </div>
+          <div class="turma">
+            <div class="t-lbl">
+              <div class="t-icon">2</div>
+              Turma 2 &middot; Tarde
+            </div>
+            <div class="t-time">13h00</div>
+            <div class="t-dur">encerra &agrave;s 14h00</div>
+          </div>
+        </div>
+        <div class="spkbox">
+          <div class="spk-av">${d.ini}</div>
+          <div>
+            <div class="spk-n">${d.spk}</div>
+            <div class="spk-r">${d.role}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  c.querySelector('.dc-hd').addEventListener('click', () => {
+    const open = c.classList.contains('open');
+    document.querySelectorAll('.dc.open').forEach(x => x.classList.remove('open'));
+    if (!open) c.classList.add('open');
+  });
+  acc.appendChild(c);
+});
+
+/* ─── FORMULÁRIO ─── */
+function submitForm() {
+  const nome  = document.getElementById('f-nome').value.trim();
+  const setor = document.getElementById('f-setor').value.trim();
+  const dia   = document.getElementById('f-dia').value;
+  const turma = document.getElementById('f-turma').value;
+  if (!nome || !setor || !dia || !turma) {
+    alert('Por favor, preencha todos os campos antes de confirmar.');
+    return;
+  }
+  document.getElementById('form-wrap').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+</script>
+</body>
+</html>
